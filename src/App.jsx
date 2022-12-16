@@ -5,7 +5,9 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-   <h2 className="text-3xl underline font-bold font-sans text-blue-400 bg-cyan-100 px-3 max-w-md mx-auto py-7 rounded-md">Hello World!</h2>
+    <h2 className="text-3xl font-poppins font-bold  text-slate-900 drop-shadow-md bg-slate-400 px-3 max-w-lg mx-auto py-2 rounded-md hover:shadow-md hover:cursor-pointer transition-all">
+      Task List
+    </h2>
   )
 }
 
