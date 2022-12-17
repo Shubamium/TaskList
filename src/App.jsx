@@ -23,7 +23,9 @@ function App() {
       let res = await JSON.parse(localStorage.getItem('taskList'));
       console.log('aaa')
       setLoaded(true);
-      setTaskList(res);
+      setTaskList(()=>{
+        return res || [];
+      });
     }
 
     loadStorage();
