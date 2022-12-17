@@ -41,13 +41,26 @@ function App() {
     console.log(updated);
     setTaskList(updated);
   }
+
+  const removeTask = (id)=>{
+    setTaskList((prev)=>{
+      let updated = prev.filter(task => task.id !== id);
+      return updated;
+    });
+  }
   
   return (
     <>
       <h2 className='font-poppins text-center text-4xl font-bold text-sky-500'>Task List</h2>
-      <TaskList tasks={taskList} setFinish={(id)=>{
+      <TaskList 
+      tasks={taskList} 
+      setFinish={(id)=>{
         finishTask(id);
-      }}/>
+      }}
+      remove={(id)=>{
+        removeTask(id);
+      }}
+      />
     </>
 
   )
