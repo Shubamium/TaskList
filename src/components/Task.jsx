@@ -12,6 +12,7 @@ const Task = ({task,completed, remove}) => {
             ease:'easein'
         });
 
+        e.target.disabled = true;
         animation.addEventListener('finish',()=>{
             remove();
         });
