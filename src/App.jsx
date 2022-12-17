@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AddTaskForm from './components/AddTaskForm';
 import Modal from './components/Modal';
 import TaskList from './components/TaskList'
@@ -9,12 +9,33 @@ function App() {
     {
       id:0,
       taskName:"This is a sample Task!",
-      taskDes:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+      taskDes:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      finished:false
     }
   ];
+
   let [taskList,setTaskList] = useState(initTask);
   let [modalTask,setModalTask] = useState(false);
+  let [loaded, setLoaded] = useState(false);
 
+  useEffect(()=>{
+    async function loadStorage(){
+      let res = await JSON.parse(localStorage.getItem('taskList'));
+      console.log('aaa')
+      setLoaded(true);
+      setTaskList(res);
+    }
+
+    loadStorage();
+  },[]);
+  
+  useEffect(()=>{
+    if(!loaded)return;
+    console.log('update');
+    localStorage.setItem('taskList',JSON.stringify(taskList));
+  },[taskList]);
+
+  
   const finishTask = (id)=>{
     let updated = taskList.map((task)=>{
       if(task.id === id){
