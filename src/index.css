@@ -13,8 +13,9 @@
     animation: fade-in 450ms ease-in forwards ;
 }
 .modal .panel{
+    opacity: 0;
     transform:  translateY(-50vh);
-    animation: fly-in 450ms cubic-bezier(.45,1.6,.62,.57) forwards;
+    animation: fly-in 450ms cubic-bezier(.45,1.6,.62,.57) forwards, fade-in-op 450ms ease-in forwards ;
     animation-delay: 250ms;
 }
 
@@ -29,9 +30,17 @@
 }
 @keyframes fade-in {
     from{
+        background-color: rgba(0,0,255,0);
+    }
+    to{
+        background-color: rgba(30, 30, 65, 0.85);
+    }
+}
+@keyframes fade-in-op {
+    from{
         opacity: 0;
     }
     to{
-        opacity: .95;
+        opacity: 1;
     }
 }

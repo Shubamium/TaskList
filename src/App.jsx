@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import AddTaskForm from './components/AddTaskForm';
 import Modal from './components/Modal';
 import TaskList from './components/TaskList'
 
@@ -7,27 +8,8 @@ function App() {
   const initTask = [
     {
       id:0,
-      taskName:"First Task",
-      taskDes:"Description here!!Description here!!Description here!!Description here!!",
-      finished:false
-    },
-    {
-      id:1,
-      taskName:"TaskName",
-      taskDes:"Description here!!",
-      finished:false
-    },
-    {
-      id:2,
-      taskName:"TaskName",
-      taskDes:"Description here!!",
-      finished:false
-    },
-    {
-      id:3,
-      taskName:"TaskName",
-      taskDes:"Description here!!",
-      finished:false
+      taskName:"This is a sample Task!",
+      taskDes:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     }
   ];
   let [taskList,setTaskList] = useState(initTask);
@@ -50,10 +32,27 @@ function App() {
       return updated;
     });
   }
+
+  const addTask = (name,des) =>{
+    setTaskList((tl)=>{
+      let updated = [...tl];
+      updated.push({
+        id: updated.length,
+        taskName:name,
+        taskDes:des
+      })
+      return updated;
+    });
+  }
   
   return (
     <>
-      <Modal isOpen={modalTask} onHide={()=>{setModalTask(false)}}></Modal>
+      <Modal isOpen={modalTask} onHide={()=>{setModalTask(false)}}>
+        <AddTaskForm submit={(name,des)=>{
+          addTask(name,des);
+          setModalTask(false);
+        }}/>
+      </Modal>
       <h2 className='font-poppins text-center text-4xl font-bold text-sky-500'>Task List</h2>
       <TaskList 
       tasks={taskList} 

@@ -2,7 +2,7 @@ import Task from "./Task";
 import TaskAdd from "./TaskAdd";
 const TaskList = ({tasks, setFinish, taskModal, remove}) => {
     return ( 
-        <div className="task-list flex flex-auto flex-wrap m-5 lg:max-w-xl lg:mx-auto">
+        <div className="task-list flex flex-auto flex-wrap m-5 lg:max-w-4xl lg:mx-auto">
             <TaskAdd click={()=>{
                 taskModal(true);
             }}/>
