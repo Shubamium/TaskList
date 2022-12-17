@@ -30,11 +30,24 @@ function App() {
     }
   ];
   let [taskList,setTaskList] = useState(initTask);
+
+  const finishTask = (id)=>{
+    let updated = taskList.map((task)=>{
+      if(task.id === id){
+          task.finished = !task.finished;
+      }
+      return task;
+    });
+    console.log(updated);
+    setTaskList(updated);
+  }
   
   return (
     <>
       <h2 className='font-poppins text-center text-4xl font-bold text-sky-500'>Task List</h2>
-      <TaskList tasks={taskList}/>
+      <TaskList tasks={taskList} setFinish={(id)=>{
+        finishTask(id);
+      }}/>
     </>
 
   )
