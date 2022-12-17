@@ -18,7 +18,7 @@ const Task = ({task,completed, remove}) => {
         });
     };
     return ( 
-        <div className={`${!task.finished ?  'bg-sky-500' : 'bg-emerald-500'} task p-2 text-sky-100 text-center my-4 max-w-lg mx-auto shadow-sm rounded-md hover:shadow-lg border-2 border-slate-700 inset-5 hover:translate-x-3 transition-all`} >
+        <div className={`${!task.finished ?  'bg-sky-500' : 'bg-emerald-500'} task p-2 text-sky-100 text-center my-4 max-w-lg mx-auto shadow-sm rounded-md hover:shadow-lg border-2 border-slate-700 inset-5 hover:translate-x-3 transition-all hover:outline`} >
             <h2 className="font-poppins text-xl font-bold text-sky-900 my-0">{task.taskName}</h2>
             <p className="font-poppins">{task.taskDes}</p>
             
