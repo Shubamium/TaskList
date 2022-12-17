@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Modal from './components/Modal';
 import TaskList from './components/TaskList'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
     }
   ];
   let [taskList,setTaskList] = useState(initTask);
+  let [modalTask,setModalTask] = useState(false);
 
   const finishTask = (id)=>{
     let updated = taskList.map((task)=>{
@@ -38,7 +40,7 @@ function App() {
       }
       return task;
     });
-    console.log(updated);
+
     setTaskList(updated);
   }
 
@@ -51,6 +53,7 @@ function App() {
   
   return (
     <>
+      <Modal isOpen={modalTask} onHide={()=>{setModalTask(false)}}></Modal>
       <h2 className='font-poppins text-center text-4xl font-bold text-sky-500'>Task List</h2>
       <TaskList 
       tasks={taskList} 
@@ -60,6 +63,7 @@ function App() {
       remove={(id)=>{
         removeTask(id);
       }}
+      taskModal={setModalTask}
       />
     </>
 

@@ -23,7 +23,7 @@ const Task = ({task,completed, remove}) => {
             <p className="font-poppins">{task.taskDes}</p>
             
             <button className="bg-sky-800 hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={completed}>Completed</button>
-            <button className="bg-red-700 hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={animateExit}>Remove</button>
+            <button className="bg-rose-500 hover:bg-rose-700 hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={animateExit}>Remove</button>
         </div> 
      );
 }

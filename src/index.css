@@ -9,3 +9,29 @@
 @tailwind components;
 @tailwind utilities;
 
+.modal{
+    animation: fade-in 450ms ease-in forwards ;
+}
+.modal .panel{
+    transform:  translateY(-50vh);
+    animation: fly-in 450ms cubic-bezier(.45,1.6,.62,.57) forwards;
+    animation-delay: 250ms;
+}
+
+@keyframes fly-in {
+    from{
+        transform: translateY(-50vh);
+    }
+    to{
+        transform: translateY(0);
+
+    }
+}
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: .95;
+    }
+}
