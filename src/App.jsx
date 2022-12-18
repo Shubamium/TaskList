@@ -1,4 +1,5 @@
 import TaskDisplayer from "./components/TaskDisplayer";
+import Sidebar from "./components/Sidebar";
 import "./App.css";
 function App() {
 
@@ -14,11 +15,7 @@ function App() {
 
   return(
     <div className="app">
-      <div className="sidebar shadow-lg bg-slate-800">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-      </div>
+      <Sidebar />
       <TaskDisplayer toDisplay={initTask}/>
     </div>
   );

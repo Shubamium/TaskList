@@ -1,7 +1,6 @@
 const Task = ({task,completed, remove, update}) => {
 
     const animateExit= (e)=>{
-        
         let animation =  e.target.parentNode.animate([
             { transform:'translateX(0)',opacity:1,},
             {transform:'translateX(40px)',opacity:0}

@@ -19,6 +19,8 @@
     animation-delay: 250ms;
 }
 
+
+
 @keyframes fly-in {
     from{
         transform: translateY(-50vh);
