@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLayerGroup,faNoteSticky} from "@fortawesome/free-solid-svg-icons";
+
 const Sidebar = () => {
     return ( 
         <div className="sidebar shadow-lg bg-slate-700 h-screen flex flex-col justify-items-stretch">
