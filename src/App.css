@@ -1,0 +1,19 @@
+.sidebar{
+    /* background-color: rgb(49, 54, 97); */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 5%;
+    height: 100%;
+    z-index: 10;
+    transition: all 250ms ease;
+}
+
+.panel-offset{
+    transition: all 250ms ease;
+    margin-left: 5%;
+}
+
+.sidebar:hover{
+    width: 15%;
+}
