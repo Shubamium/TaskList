@@ -3,8 +3,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 5%;
-    height: 100%;
+    width: 7%;
+    height: 100vh;
     z-index: 10;
     transition: all 250ms ease;
 }
@@ -15,14 +15,19 @@
 }
 
 .sidebar:hover{
-    width: 15%;
+    width: 24%;
 }
 .sidebar .hover-show{
     opacity: 0;
-    transition: all 250ms ease;
-    visibility: hidden;
+    transition: all 150ms ease;
+    white-space: nowrap;
 }
 .sidebar:hover .hover-show{
     opacity: 1;
-    visibility: collapse;
+    transition-delay: 250ms;
+}
+
+
+.sidebar .group-list::-webkit-scrollbar{
+    display: none;
 }
