@@ -1,6 +1,6 @@
 import Task from "./Task";
 import TaskAdd from "./TaskAdd";
-const TaskList = ({tasks, setFinish, taskModal, remove}) => {
+const TaskList = ({tasks, setFinish, taskModal, remove, updateModal}) => {
     return ( 
         <div className="task-list flex flex-auto flex-wrap m-5 lg:max-w-4xl lg:mx-auto">
             <TaskAdd click={()=>{
@@ -13,7 +13,11 @@ const TaskList = ({tasks, setFinish, taskModal, remove}) => {
                 }} 
                 remove={()=>{
                     remove(task.id);
-                }}/>
+                }}
+                update={()=>{
+                    updateModal(task.id);
+                }}
+                />
             )}
         </div>
      );

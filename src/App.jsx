@@ -17,6 +17,8 @@ function App() {
 
   let [taskList,setTaskList] = useState(initTask);
   let [modalTask,setModalTask] = useState(false);
+  let [modalUpdate,setModalUpdate] = useState(false);
+  let [updateID,setUpdateID] = useState(0);
   let [loaded, setLoaded] = useState(false);
 
   useEffect(()=>{
@@ -71,6 +73,21 @@ function App() {
       return updated;
     });
   }
+
+  const updateTask = (id, name, des)=>{
+    console.log(id, name,des);
+
+    setTaskList((prev)=>{
+      let updated = prev.map(task=>{
+        if(task.id === id){
+          let newTask = {...task,taskName:name, taskDes:des};
+          return newTask;
+        }
+        return task;
+      });
+      return updated;
+    });
+  }
   
   return (
     <>
@@ -80,6 +97,14 @@ function App() {
           setModalTask(false);
         }}/>
       </Modal>
+
+      <Modal isOpen={modalUpdate} onHide={()=>{setModalUpdate(false)}}>
+        <AddTaskForm submit={(name,des)=>{
+          updateTask(updateID,name,des);
+          setModalUpdate(false);
+        }} update={true} placeholderData={taskList.find((task)=> task.id == updateID)}/>
+      </Modal>
+
       <h2 className='font-poppins text-center text-4xl font-bold text-sky-500'>Task List</h2>
       <TaskList 
       tasks={taskList} 
@@ -90,6 +115,10 @@ function App() {
         removeTask(id);
       }}
       taskModal={setModalTask}
+      updateModal={(id)=>{
+        setUpdateID(id);
+        setModalUpdate(true);
+      }}
       />
     </>
 
