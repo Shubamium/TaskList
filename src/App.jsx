@@ -22,7 +22,6 @@ function App() {
   useEffect(()=>{
     async function loadStorage(){
       let res = await JSON.parse(localStorage.getItem('taskList'));
-      console.log('aaa')
       setLoaded(true);
       setTaskList(()=>{
         return res || [];
@@ -34,7 +33,6 @@ function App() {
   
   useEffect(()=>{
     if(!loaded)return;
-    console.log('update');
     localStorage.setItem('taskList',JSON.stringify(taskList));
   },[taskList]);
 
@@ -61,8 +59,11 @@ function App() {
     setTaskList((tl)=>{
       let updated = [...tl];
       let newDate = new Date();
+      let newIndex = updated.map(obj=> obj.id);
+      newIndex = newIndex.length === 0 ? 0 : Math.max(...newIndex) + 1;
+      console.log(newIndex);
       updated.push({
-        id: updated.length,
+        id: newIndex,
         taskName:name,
         taskDes:des,
         created: newDate.toUTCString()
