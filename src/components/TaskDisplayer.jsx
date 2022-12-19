@@ -95,7 +95,7 @@ const TaskDisplayer = ({toDisplay}) => {
         }} update={true} placeholderData={taskList.find((task)=> task.id == updateID)}/>
       </Modal>
 
-      <h2 className='font-poppins text-center text-4xl font-bold text-sky-500 bg-cyan-800 p-4 shadow-lg'>Task List</h2>
+      <h2 className='font-poppins text-center text-4xl font-bold text-sky-500 bg-blue-800 p-4 shadow-lg'>Task List</h2>
 
       <TaskList 
       tasks={taskList} 
