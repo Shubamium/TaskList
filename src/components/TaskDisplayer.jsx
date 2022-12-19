@@ -47,18 +47,18 @@ const TaskDisplayer = ({toDisplay}) => {
     });
   }
 
-  const addTask = (name,des) =>{
+  const addTask = (name,des,cat) =>{
     setTaskList((tl)=>{
       let updated = [...tl];
       let newDate = new Date();
       let newIndex = updated.map(obj=> obj.id);
       newIndex = newIndex.length === 0 ? 0 : Math.max(...newIndex) + 1;
-      console.log(newIndex);
       updated.push({
         id: newIndex,
         taskName:name,
         taskDes:des,
-        created: newDate.toUTCString()
+        created:newDate.toUTCString(),
+        category:cat
       })
       return updated;
     });
@@ -82,8 +82,8 @@ const TaskDisplayer = ({toDisplay}) => {
   return (
     <div className='panel-offset'>
       <Modal isOpen={modalTask} onHide={()=>{setModalTask(false)}}>
-        <AddTaskForm submit={(name,des)=>{
-          addTask(name,des);
+        <AddTaskForm submit={(name,des,cat)=>{
+          addTask(name,des,cat);
           setModalTask(false);
         }}/>
       </Modal>

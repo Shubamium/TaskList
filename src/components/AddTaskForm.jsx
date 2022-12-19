@@ -7,6 +7,7 @@ const AddTaskForm = ({submit, update, placeholderData}) => {
 
     let [name, setName] = useState(update ? placeholderData.taskName : '');
     let [desc, setDesc] = useState(update ? placeholderData.taskDes : '');
+    let [cat, setCat] = useState(update ? placeholderData.category : '');
 
     const handleName = (e)=>{
         setName(e.target.value);
@@ -15,6 +16,12 @@ const AddTaskForm = ({submit, update, placeholderData}) => {
     const handleDesc = (e)=>{
         setDesc(e.target.value);
     }
+
+    const handleCat = (e)=>{
+        setCat(e.target.value);
+        console.log(e.target.value + "changed" + cat);
+       
+    }
     return ( 
         <form className="mx-5 px-10" onSubmit={(e)=>{
             e.preventDefault();
@@ -22,7 +29,7 @@ const AddTaskForm = ({submit, update, placeholderData}) => {
             // let formData = new FormData(e.target);
             // let name = formData.get('taskName');
             // let description = formData.get('taskDes');
-            submit(name,desc);
+            submit(name,desc,cat);
         }}>
             <h2 className="font-poppins text-3xl font-bold ">{update ? 'Update Task ' :'Add a new task' }</h2>
             <label htmlFor="name" className="p-2 font-poppins font-bold text-indigo-900">Name</label>
@@ -38,6 +45,13 @@ const AddTaskForm = ({submit, update, placeholderData}) => {
             value={desc}
             onChange={handleDesc}
             ></textarea>
+
+            <select selected={cat} onChange={handleCat}>
+                <option value="" selected>Ungrouped</option>
+                <option value="Foods">Foods</option>
+                <option value="Games">Games</option>
+                <option value="Job">Job</option>
+            </select>
             <button type="submit" className="block mx-auto bg-sky-900 font-poppins rounded-sm font-bold p-2 m-4 shadow-md relative text-sky-300 hover:scale-105 active:scale-95">{update ? 'Update Task' :'Add Task' }</button>
         </form>
      );
