@@ -82,7 +82,7 @@ const TaskDisplayer = ({toDisplay}) => {
 
   const groups = ['Food','Chores','Games','Job'];
   return (
-    <div className='panel-offset'>
+    <div className='panel-offset  shadow-inner'>
       <Modal isOpen={modalTask} onHide={()=>{setModalTask(false)}}>
         <AddTaskForm submit={(name,des,cat)=>{
           addTask(name,des,cat);
