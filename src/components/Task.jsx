@@ -19,7 +19,11 @@ const Task = ({task,completed, remove, update}) => {
     return ( 
         <div className={`${!task.finished ?  'bg-sky-500' : 'bg-emerald-500'} task p-2 text-sky-100 text-center my-4 mx-auto px-9 max-w-full overflow-hidden shadow-sm rounded-md hover:shadow-lg border-2 border-slate-700 inset-5 hover:translate-x-3 transition-all hover:outline`} >
             <h2 className="font-poppins text-2xl font-bold text-sky-900 my-0 break-words">{task.taskName}</h2>
-            <p className="font-poppins text-slate-800 text-xs font-light">{task.hasOwnProperty('created') && task.created}</p>
+            <p className="font-poppins text-slate-800 text-xs font-light">
+             {task.hasOwnProperty('created') && task.created} 
+             {task.category ?' - ' :''} 
+             <span className="font-bold text-sky-900">{task.category}</span>
+             </p>
             <p className="font-poppins font-medium break-words">{task.taskDes}</p>
             
             <button className="bg-sky-800 shadow-md text-xs hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={completed}>Completed</button>

@@ -79,13 +79,17 @@ const TaskDisplayer = ({toDisplay}) => {
     });
   }
   
+
+  const groups = ['Food','Chores','Games','Job'];
   return (
     <div className='panel-offset'>
       <Modal isOpen={modalTask} onHide={()=>{setModalTask(false)}}>
         <AddTaskForm submit={(name,des,cat)=>{
           addTask(name,des,cat);
           setModalTask(false);
-        }}/>
+        }}
+        categoryList={groups}
+        />
       </Modal>
 
       <Modal isOpen={modalUpdate} onHide={()=>{setModalUpdate(false)}}>
