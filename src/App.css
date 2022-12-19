@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 7%;
+    width: 100px;
     height: 100vh;
     z-index: 10;
     transition: all 250ms ease;
@@ -11,11 +11,11 @@
 
 .panel-offset{
     transition: all 250ms ease;
-    margin-left: 5%;
+    margin-left: 100px;
 }
 
 .sidebar:hover{
-    width: 24%;
+    width: 400px;
 }
 .sidebar .hover-show{
     opacity: 0;
@@ -30,4 +30,8 @@
 
 .sidebar .group-list::-webkit-scrollbar{
     display: none;
+}
+
+.panel-reoffset{
+    margin-left: -100px;
 }

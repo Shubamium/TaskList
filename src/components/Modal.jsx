@@ -6,7 +6,7 @@ const Modal = ({isOpen,onHide,children}) => {
     return (
       <>
         {isOpen && (
-          <div className="bg-slate-800 fixed w-full h-full z-50 flex justify-center items-center  modal">
+          <div className="bg-slate-800 fixed w-full h-full z-50 flex justify-center items-center  modal panel-reoffset">
               <div className="panel bg-blue-600 ">
                     <div className="action w-100 flex justify-end">
                         {closeButton()}
