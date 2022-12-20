@@ -1,6 +1,9 @@
 import TaskDisplayer from "./components/TaskDisplayer";
 import Sidebar from "./components/Sidebar";
 import "./App.css";
+import { useState } from "react";
+
+
 function App() {
 
   const initTask = [
@@ -13,9 +16,27 @@ function App() {
     }
   ];
 
+   // This state ideally should be lifted up
+   let [groups, setGroups] = useState([
+    {id:0,group:'Foods'},
+    {id:1,group:'Chores'},
+    {id:2,group:'Job'}
+  ]);
+
+
+  const addGroup = (name)=>{
+      setGroups((prev)=>{
+          let newGroup = [...prev];
+          newGroup.push({group:name});
+          return newGroup;
+      });
+  }
+
   return(
     <div className="app">
-      <Sidebar />
+      <Sidebar groups={groups}  addGroup={addGroup} 
+      displayGroup="a"
+      />
       <TaskDisplayer toDisplay={initTask}/>
     </div>
   );

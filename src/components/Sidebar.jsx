@@ -1,23 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLayerGroup,faNoteSticky ,faPlus, faList} from "@fortawesome/free-solid-svg-icons";
 import SidebarButton from "./SidebarButton";
-import { useState } from "react";
 import Modal from "./Modal";
-const Sidebar = () => {
 
-    // This state ideally should be lifted up
-    let [groups, setGroups] = useState([
-        {group:'Foods'},
-        {group:'Chores'},
-        {group:'Job'}
-    ]);
+import AddGroupForm from "./AddGroupForm";
+import { useState } from "react";
+const Sidebar = ({groups, addGroup}) => {
 
+   
+  let [groupAddModal,setGroupAddModal] = useState(false);
 
-    let [groupAddModal,setGroupAddModal] = useState(false);
     return (
         <>
         <div className="panel-offset">
-             <Modal isOpen={groupAddModal} onHide={()=>setGroupAddModal(false)}/>
+             <Modal isOpen={groupAddModal} onHide={()=>setGroupAddModal(false)}>
+                <AddGroupForm submit={(name)=>{
+                    setGroupAddModal(false);
+                    addGroup(name);
+                }}/>
+             </Modal>
         </div>
         <div className="sidebar shadow-2xl bg-gray-800 h-screen flex flex-col justify-items-stretch md:hover:w-80^">
             
@@ -31,7 +32,7 @@ const Sidebar = () => {
                <SidebarButton name="All Tasks" iconBgColor="bg-rose-800" renderIcon={()=><FontAwesomeIcon icon={faList}/>}/>
                <SidebarButton name="Add Group" iconBgColor="bg-indigo-600" renderIcon={()=><FontAwesomeIcon icon={faPlus}/>} click={()=>setGroupAddModal(true)}/>
                {groups.map((group)=>(
-                    <SidebarButton name={group.group} renderIcon={()=><FontAwesomeIcon icon={faNoteSticky}/>}/>
+                    <SidebarButton name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={faNoteSticky}/>}/>
                ))}
             </div>
 
