@@ -46,3 +46,26 @@
         opacity: 1;
     }
 }
+
+/* let colorList = ['red-500','orange-500','yellow-300','lime-400','emerald-500']; */
+
+.color-red-500{
+    @apply bg-red-500;
+}
+
+.color-orange-500{
+    @apply bg-orange-500;
+}
+
+
+.color-yellow-300{
+    @apply bg-yellow-300;
+}
+
+.color-lime-400{
+    @apply bg-lime-400;
+}
+
+.color-emerald-500{
+    @apply bg-emerald-500;
+}

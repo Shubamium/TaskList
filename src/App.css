@@ -35,3 +35,13 @@
 .panel-reoffset{
     margin-left: -100px;
 }
+
+/* let colorList = ['red-500','orange-500','yellow-300','lime-400','emerald-500']; */
+
+.color-red-500{
+    @apply bg-red-500;
+}
+
+.color-orange-500{
+    @apply bg-orange-500;
+}
