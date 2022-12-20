@@ -4,7 +4,7 @@ import Modal from './Modal';
 import TaskList from './TaskList';
 
 
-const TaskDisplayer = ({headerText,groups, taskList, setTaskList}) => {
+const TaskDisplayer = ({toDisplay, headerText,groups, taskList, setTaskList}) => {
   
   let [modalTask,setModalTask] = useState(false);
   let [modalUpdate,setModalUpdate] = useState(false);
@@ -47,13 +47,12 @@ const TaskDisplayer = ({headerText,groups, taskList, setTaskList}) => {
     });
   }
 
-  const updateTask = (id, name, des)=>{
-    console.log(id, name,des);
+  const updateTask = (id, name, des,cat)=>{
 
     setTaskList((prev)=>{
       let updated = prev.map(task=>{
         if(task.id === id){
-          let newTask = {...task,taskName:name, taskDes:des};
+          let newTask = {...task,taskName:name, taskDes:des, category:cat};
           return newTask;
         }
         return task;
@@ -76,16 +75,18 @@ const TaskDisplayer = ({headerText,groups, taskList, setTaskList}) => {
       </Modal>
 
       <Modal isOpen={modalUpdate} onHide={()=>{setModalUpdate(false)}}>
-        <AddTaskForm submit={(name,des)=>{
-          updateTask(updateID,name,des);
+        <AddTaskForm submit={(name,des,cat)=>{
+          updateTask(updateID,name,des,cat);
           setModalUpdate(false);
-        }} update={true} placeholderData={taskList.find((task)=> task.id == updateID)}/>
+        }} update={true} placeholderData={taskList.find((task)=> task.id == updateID)}
+        categoryList={groups}
+        />
       </Modal>
 
       <h2 className='font-poppins text-center text-4xl font-bold text-sky-500 bg-blue-800 p-4 shadow-lg'>{headerText !== undefined ? headerText:'Task List'}</h2>
 
       <TaskList 
-      tasks={taskList} 
+      tasks={toDisplay()} 
       setFinish={(id)=>{
         finishTask(id);
       }}

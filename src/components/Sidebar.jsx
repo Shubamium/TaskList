@@ -1,17 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLayerGroup,faNoteSticky ,faPlus, faList, faEdit, faX} from "@fortawesome/free-solid-svg-icons";
+import { faLayerGroup,faNoteSticky ,faPlus, faList, faEdit, faX, faCancel} from "@fortawesome/free-solid-svg-icons";
 import SidebarButton from "./SidebarButton";
 import Modal from "./Modal";
 
 import AddGroupForm from "./AddGroupForm";
 import { useState } from "react";
-const Sidebar = ({groups, addGroup, removeGroup}) => {
+const Sidebar = ({groups, addGroup, removeGroup, showAll,showGroup}) => {
 
     let [groupAddModal,setGroupAddModal] = useState(false);
     let [editMode,setEditMode] = useState(false);
 
     let showGroupButtons = groups.map((group)=>(
-        <SidebarButton name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={faNoteSticky}/>}/>
+        <SidebarButton 
+        click={
+            ()=>{
+                showGroup(group.group);
+            }
+        }
+        name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={faNoteSticky}/>}/>
     ));
 
     let editGroupButtons = groups.map((group)=>(
@@ -40,9 +46,9 @@ const Sidebar = ({groups, addGroup, removeGroup}) => {
                 </div>
             </div>
             <div className="group-list p-1 py-4 grid gap-4 overflow-auto overflow-x-hidden">
-               <SidebarButton name="All Tasks" iconBgColor="bg-rose-800" renderIcon={()=><FontAwesomeIcon icon={faList}/>}/>
+               <SidebarButton name="All Tasks" iconBgColor="bg-rose-800" renderIcon={()=><FontAwesomeIcon icon={faList}/>} click={()=>showAll()}/>
                <SidebarButton name="Add Group" iconBgColor="bg-indigo-600" renderIcon={()=><FontAwesomeIcon icon={faPlus}/>} click={()=>setGroupAddModal(true)}/>
-               <SidebarButton name="Edit Group" iconBgColor="bg-indigo-600" renderIcon={()=><FontAwesomeIcon icon={faEdit}/>} click={()=>setEditMode((prev)=> !prev)}/>
+               <SidebarButton name={editMode ? "Cancel" : "Edit Group"} iconBgColor="bg-indigo-600" renderIcon={()=><FontAwesomeIcon icon={editMode ? faCancel : faEdit }/>} click={()=>setEditMode((prev)=> !prev)}/>
                {editMode ? editGroupButtons : showGroupButtons}
             </div>
 

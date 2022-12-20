@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const AddTaskForm = ({submit, update, placeholderData,categoryList}) => {
     if(update){
-        console.log(placeholderData.taskName);
+        console.log(placeholderData);
     }
 
     let [name, setName] = useState(update ? placeholderData.taskName : '');
@@ -46,10 +46,10 @@ const AddTaskForm = ({submit, update, placeholderData,categoryList}) => {
             onChange={handleDesc}
             ></textarea>
 
-            <select selected={cat} onChange={handleCat}>
-                <option value="" selected></option>
+            <select onChange={handleCat} defaultValue={placeholderData === undefined ? "": placeholderData.category}>
+                <option value=""></option>
                 {categoryList.map((cat)=> (
-                    <option value={cat.group}>{cat.group}</option>
+                    <option value={cat.group} >{cat.group}</option>
                 ))}
             </select>
             <button type="submit" className="block mx-auto bg-sky-900 font-poppins rounded-sm font-bold p-2 m-4 shadow-md relative text-sky-300 hover:scale-105 active:scale-95">{update ? 'Update Task' :'Add Task' }</button>

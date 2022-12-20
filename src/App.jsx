@@ -43,6 +43,7 @@ function App() {
 
   let [taskList,setTaskList] = useState(initTask);
   let [loaded, setLoaded] = useState(false);
+  let [toDisplay, setToDisplay] = useState('');
 
   useEffect(()=>{
     async function loadStorage(){
@@ -52,13 +53,13 @@ function App() {
         return res || [];
       });
     }
-
     loadStorage();
   },[]);
   
   useEffect(()=>{
     if(!loaded)return;
     localStorage.setItem('taskList',JSON.stringify(taskList));
+    // setToDisplay(taskList);
   },[taskList]);
 
   const removeGroupFromTask = (groupName)=>{
@@ -78,14 +79,27 @@ function App() {
     });
 
   }
-    
+  
+  const showAll = ()=>{
+    setToDisplay(taskList);
+  }
+
+  const showGroup = (groupName)=>{
+    setToDisplay(groupName);
+  }
+
+  const filterTask = ()=> taskList.filter((task) => task.category === toDisplay);
+
+  const getFilteredTask = ()=>{
+    return toDisplay === '' ? taskList : filterTask();
+  };
 
   return(
     <div className="app">
       <Sidebar groups={groups}  addGroup={addGroup} removeGroup={removeGroup}
-      displayGroup="a"
+      displayGroup="a" showAll={showAll} showGroup={showGroup}
       />
-      <TaskDisplayer groups={groups} taskList={taskList} setTaskList={setTaskList}/>
+      <TaskDisplayer toDisplay={getFilteredTask} groups={groups} taskList={taskList} setTaskList={setTaskList}/>
     </div>
   );
 }
