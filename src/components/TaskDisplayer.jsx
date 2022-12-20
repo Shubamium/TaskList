@@ -4,7 +4,7 @@ import Modal from './Modal';
 import TaskList from './TaskList';
 
 
-const TaskDisplayer = ({toDisplay}) => {
+const TaskDisplayer = ({toDisplay,headerText,groups}) => {
   let [taskList,setTaskList] = useState(toDisplay);
   let [modalTask,setModalTask] = useState(false);
   let [modalUpdate,setModalUpdate] = useState(false);
@@ -80,7 +80,7 @@ const TaskDisplayer = ({toDisplay}) => {
   }
   
 
-  const groups = ['Food','Chores','Games','Job'];
+
   return (
     <div className='panel-offset  shadow-inner'>
       <Modal isOpen={modalTask} onHide={()=>{setModalTask(false)}}>
@@ -99,7 +99,7 @@ const TaskDisplayer = ({toDisplay}) => {
         }} update={true} placeholderData={taskList.find((task)=> task.id == updateID)}/>
       </Modal>
 
-      <h2 className='font-poppins text-center text-4xl font-bold text-sky-500 bg-blue-800 p-4 shadow-lg'>Task List</h2>
+      <h2 className='font-poppins text-center text-4xl font-bold text-sky-500 bg-blue-800 p-4 shadow-lg'>{headerText !== undefined ? headerText:'Task List'}</h2>
 
       <TaskList 
       tasks={taskList} 

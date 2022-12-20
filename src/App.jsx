@@ -37,7 +37,7 @@ function App() {
       <Sidebar groups={groups}  addGroup={addGroup} 
       displayGroup="a"
       />
-      <TaskDisplayer toDisplay={initTask}/>
+      <TaskDisplayer toDisplay={initTask} groups={groups}/>
     </div>
   );
 }
