@@ -31,10 +31,17 @@ function App() {
           return newGroup;
       });
   }
+  const removeGroup = (id)=>{
+    setGroups((prev)=>{
+      let newGroup = [...prev];
+      newGroup = newGroup.filter((val) => val.id !== id);
+      return newGroup;
+    })
+  }
 
   return(
     <div className="app">
-      <Sidebar groups={groups}  addGroup={addGroup} 
+      <Sidebar groups={groups}  addGroup={addGroup} removeGroup={removeGroup}
       displayGroup="a"
       />
       <TaskDisplayer toDisplay={initTask} groups={groups}/>

@@ -1,15 +1,26 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLayerGroup,faNoteSticky ,faPlus, faList} from "@fortawesome/free-solid-svg-icons";
+import { faLayerGroup,faNoteSticky ,faPlus, faList, faEdit, faX} from "@fortawesome/free-solid-svg-icons";
 import SidebarButton from "./SidebarButton";
 import Modal from "./Modal";
 
 import AddGroupForm from "./AddGroupForm";
 import { useState } from "react";
-const Sidebar = ({groups, addGroup}) => {
+const Sidebar = ({groups, addGroup, removeGroup}) => {
 
-   
-  let [groupAddModal,setGroupAddModal] = useState(false);
+    let [groupAddModal,setGroupAddModal] = useState(false);
+    let [editMode,setEditMode] = useState(false);
 
+    let showGroupButtons = groups.map((group)=>(
+        <SidebarButton name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={faNoteSticky}/>}/>
+    ));
+
+    let editGroupButtons = groups.map((group)=>(
+        <SidebarButton 
+        click={()=>{
+            removeGroup(group.id);
+        }}
+        name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={faX} />} iconBgColor="bg-rose-600"/>
+    ));
     return (
         <>
         <div className="panel-offset">
@@ -31,9 +42,8 @@ const Sidebar = ({groups, addGroup}) => {
             <div className="group-list p-1 py-4 grid gap-4 overflow-auto overflow-x-hidden">
                <SidebarButton name="All Tasks" iconBgColor="bg-rose-800" renderIcon={()=><FontAwesomeIcon icon={faList}/>}/>
                <SidebarButton name="Add Group" iconBgColor="bg-indigo-600" renderIcon={()=><FontAwesomeIcon icon={faPlus}/>} click={()=>setGroupAddModal(true)}/>
-               {groups.map((group)=>(
-                    <SidebarButton name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={faNoteSticky}/>}/>
-               ))}
+               <SidebarButton name="Edit Group" iconBgColor="bg-indigo-600" renderIcon={()=><FontAwesomeIcon icon={faEdit}/>} click={()=>setEditMode((prev)=> !prev)}/>
+               {editMode ? editGroupButtons : showGroupButtons}
             </div>
 
         </div>
