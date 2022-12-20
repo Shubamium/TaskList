@@ -18,16 +18,21 @@ function App() {
 
    // This state ideally should be lifted up
    let [groups, setGroups] = useState([
-    {id:0,group:'Foods'},
-    {id:1,group:'Chores'},
-    {id:2,group:'Job'}
+    {id:0,group:'Chores'},
+    {id:1,group:'Life'},
+    {id:2,group:'Thoughts'},
+    {id:3,group:'Quotes'}
   ]);
 
 
   const addGroup = (name)=>{
       setGroups((prev)=>{
           let newGroup = [...prev];
-          newGroup.push({group:name});
+          let newId = prev.map((group) => group.id)
+          newId = Math.max(...newId) + 1;
+          newGroup.push({id:newId,group:name});
+          
+          localStorage.setItem('groupList', JSON.stringify(newGroup));
           return newGroup;
       });
   }
@@ -37,9 +42,26 @@ function App() {
       let find = newGroup.find((val)=> val.id === id);
       removeGroupFromTask(find.group);
       newGroup = newGroup.filter((val) => val.id !== id);
+      localStorage.setItem('groupList', JSON.stringify(newGroup));
       return newGroup;
     })
   }
+
+  useEffect(()=>{
+    
+    async function loadGroup(){
+      let res = "";
+        res = await JSON.parse(localStorage.getItem('groupList'));
+        if(!res){
+          localStorage.setItem('groupList',JSON.stringify(groups));
+          res = groups;
+        }
+      
+      setGroups(res);
+    }
+
+    loadGroup();
+  },[]);
 
   let [taskList,setTaskList] = useState(initTask);
   let [loaded, setLoaded] = useState(false);
