@@ -1,3 +1,5 @@
+import ColorList from "./ColorList";
+
 const Task = ({task,completed, remove, update}) => {
 
     const animateExit= (e)=>{
@@ -16,8 +18,10 @@ const Task = ({task,completed, remove, update}) => {
             remove();
         });
     };
+
+    let color = task.color === undefined ? `color-${ColorList()[10]}` : 'bg-sky-500';
     return ( 
-        <div className={`${!task.finished ?  'bg-sky-500' : 'bg-emerald-500'} task p-2 text-sky-100 text-center my-4 mx-auto px-9 max-w-full overflow-hidden shadow-sm rounded-md hover:shadow-lg border-2 border-slate-700 inset-5 hover:translate-x-3 transition-all hover:outline`} >
+        <div className={`${!task.finished ?  color : 'bg-emerald-500'} task p-2 text-sky-100 text-center my-4 mx-auto px-9 max-w-full overflow-hidden shadow-sm rounded-md hover:shadow-lg border-2 border-slate-700 inset-5 hover:translate-x-3 transition-all hover:outline`} >
             <h2 className="font-poppins text-2xl font-bold text-sky-900 my-0 break-words">{task.taskName}</h2>
             <p className="font-poppins text-slate-800 text-xs font-light">
              {task.hasOwnProperty('created') && task.created} 
