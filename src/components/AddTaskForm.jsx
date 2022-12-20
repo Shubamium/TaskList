@@ -10,7 +10,7 @@ const AddTaskForm = ({submit, update, placeholderData,categoryList}) => {
     let [name, setName] = useState(update ? placeholderData.taskName : '');
     let [desc, setDesc] = useState(update ? placeholderData.taskDes : '');
     let [cat, setCat] = useState(update ? placeholderData.category : '');
-    let [color, setColor] = useState(update ? placeholderData.category : 6);
+    let [color, setColor] = useState(update ? placeholderData.color : 6);
 
     let colorList = ColorList();
     const handleName = (e)=>{

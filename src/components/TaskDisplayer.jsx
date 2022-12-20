@@ -48,12 +48,12 @@ const TaskDisplayer = ({toDisplay, headerText,groups, taskList, setTaskList}) =>
     });
   }
 
-  const updateTask = (id, name, des,cat)=>{
+  const updateTask = (id, name, des, cat, colour)=>{
 
     setTaskList((prev)=>{
       let updated = prev.map(task=>{
         if(task.id === id){
-          let newTask = {...task,taskName:name, taskDes:des, category:cat};
+          let newTask = {...task,taskName:name, taskDes:des, category:cat, color:colour};
           return newTask;
         }
         return task;
@@ -76,8 +76,8 @@ const TaskDisplayer = ({toDisplay, headerText,groups, taskList, setTaskList}) =>
       </Modal>
 
       <Modal isOpen={modalUpdate} onHide={()=>{setModalUpdate(false)}}>
-        <AddTaskForm submit={(name,des,cat)=>{
-          updateTask(updateID,name,des,cat);
+        <AddTaskForm submit={(name,des,cat,col)=>{
+          updateTask(updateID,name,des,cat,col);
           setModalUpdate(false);
         }} update={true} placeholderData={taskList.find((task)=> task.id == updateID)}
         categoryList={groups}
