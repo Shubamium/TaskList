@@ -93,6 +93,8 @@
     @apply bg-slate-400;
 }
 
-
+.color-selected{
+    @apply border-4 border-slate-700;
+}
 /* d-500','sky-500','indigo-500','violet-500','purple-500','pink-500','cg-500']; */
 

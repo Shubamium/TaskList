@@ -30,7 +30,7 @@ const AddGroupForm = ({submit, update}) => {
             // let description = formData.get('taskDes');
             submit(name);
         }}>
-            <h2 className="font-poppins text-3xl font-bold ">Add Group</h2>
+            <h2 className="font-poppins text-3xl font-bold text-blue-900 ">Add Group</h2>
             <label htmlFor="name" className="p-2 font-poppins font-bold text-indigo-900">Name</label>
             <input type="text" id="name" name="taskName" className="p-2 m-2 w-full" required
             placeholder="Group name . . ."

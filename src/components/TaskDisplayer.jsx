@@ -30,7 +30,7 @@ const TaskDisplayer = ({toDisplay, headerText,groups, taskList, setTaskList}) =>
     });
   }
 
-  const addTask = (name,des,cat) =>{
+  const addTask = (name,des,cat,colour) =>{
     setTaskList((tl)=>{
       let updated = [...tl];
       let newDate = new Date();
@@ -41,7 +41,8 @@ const TaskDisplayer = ({toDisplay, headerText,groups, taskList, setTaskList}) =>
         taskName:name,
         taskDes:des,
         created:newDate.toUTCString(),
-        category:cat
+        category:cat,
+        color:colour
       })
       return updated;
     });
@@ -66,8 +67,8 @@ const TaskDisplayer = ({toDisplay, headerText,groups, taskList, setTaskList}) =>
   return (
     <div className='panel-offset  shadow-inner'>
       <Modal isOpen={modalTask} onHide={()=>{setModalTask(false)}}>
-        <AddTaskForm submit={(name,des,cat)=>{
-          addTask(name,des,cat);
+        <AddTaskForm submit={(name,des,cat,col)=>{
+          addTask(name,des,cat,col);
           setModalTask(false);
         }}
         categoryList={groups}
