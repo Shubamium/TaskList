@@ -83,7 +83,7 @@ const TaskDisplayer = ({toDisplay, headerText,groups, taskList, setTaskList}) =>
         />
       </Modal>
 
-      <h2 className='font-poppins text-center text-4xl font-bold text-sky-500 bg-blue-800 p-4 shadow-lg'>{headerText !== undefined ? headerText:'Task List'}</h2>
+      <h2 className='font-poppins text-center text-4xl font-bold text-sky-500 bg-blue-800 p-4 shadow-lg'>{headerText() !== undefined && headerText()}</h2>
 
       <TaskList 
       tasks={toDisplay()} 

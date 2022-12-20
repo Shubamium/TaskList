@@ -121,7 +121,9 @@ function App() {
       <Sidebar groups={groups}  addGroup={addGroup} removeGroup={removeGroup}
       displayGroup="a" showAll={showAll} showGroup={showGroup}
       />
-      <TaskDisplayer toDisplay={getFilteredTask} groups={groups} taskList={taskList} setTaskList={setTaskList}/>
+      <TaskDisplayer toDisplay={getFilteredTask} headerText={()=>{
+        return toDisplay === '' ? 'Task List' : toDisplay;
+      }} groups={groups} taskList={taskList} setTaskList={setTaskList}/>
     </div>
   );
 }
