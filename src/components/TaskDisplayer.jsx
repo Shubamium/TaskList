@@ -4,29 +4,12 @@ import Modal from './Modal';
 import TaskList from './TaskList';
 
 
-const TaskDisplayer = ({toDisplay,headerText,groups}) => {
-  let [taskList,setTaskList] = useState(toDisplay);
+const TaskDisplayer = ({headerText,groups, taskList, setTaskList}) => {
+  
   let [modalTask,setModalTask] = useState(false);
   let [modalUpdate,setModalUpdate] = useState(false);
   let [updateID,setUpdateID] = useState(0);
-  let [loaded, setLoaded] = useState(false);
 
-  useEffect(()=>{
-    async function loadStorage(){
-      let res = await JSON.parse(localStorage.getItem('taskList'));
-      setLoaded(true);
-      setTaskList(()=>{
-        return res || [];
-      });
-    }
-
-    loadStorage();
-  },[]);
-  
-  useEffect(()=>{
-    if(!loaded)return;
-    localStorage.setItem('taskList',JSON.stringify(taskList));
-  },[taskList]);
 
   
   const finishTask = (id)=>{

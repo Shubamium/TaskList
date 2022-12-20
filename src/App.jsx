@@ -1,7 +1,7 @@
 import TaskDisplayer from "./components/TaskDisplayer";
 import Sidebar from "./components/Sidebar";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 function App() {
@@ -34,17 +34,58 @@ function App() {
   const removeGroup = (id)=>{
     setGroups((prev)=>{
       let newGroup = [...prev];
+      let find = newGroup.find((val)=> val.id === id);
+      removeGroupFromTask(find.group);
       newGroup = newGroup.filter((val) => val.id !== id);
       return newGroup;
     })
   }
+
+  let [taskList,setTaskList] = useState(initTask);
+  let [loaded, setLoaded] = useState(false);
+
+  useEffect(()=>{
+    async function loadStorage(){
+      let res = await JSON.parse(localStorage.getItem('taskList'));
+      setLoaded(true);
+      setTaskList(()=>{
+        return res || [];
+      });
+    }
+
+    loadStorage();
+  },[]);
+  
+  useEffect(()=>{
+    if(!loaded)return;
+    localStorage.setItem('taskList',JSON.stringify(taskList));
+  },[taskList]);
+
+  const removeGroupFromTask = (groupName)=>{
+    setTaskList((tl)=>{
+      let updated = [...tl];
+      // console.log(taskList,groupName);
+      updated = updated.map((task)=>{
+          let taskNew = {...task};
+          if(task.category === groupName){
+            taskNew.category = '';
+          }
+          return taskNew;
+      });
+    //  console.log(updated);
+
+      return updated;
+    });
+
+  }
+    
 
   return(
     <div className="app">
       <Sidebar groups={groups}  addGroup={addGroup} removeGroup={removeGroup}
       displayGroup="a"
       />
-      <TaskDisplayer toDisplay={initTask} groups={groups}/>
+      <TaskDisplayer groups={groups} taskList={taskList} setTaskList={setTaskList}/>
     </div>
   );
 }
