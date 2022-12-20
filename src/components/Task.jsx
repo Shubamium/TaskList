@@ -1,5 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faCheck, faClose, faEdit,faStop,faTrash } from "@fortawesome/free-solid-svg-icons";
 import ColorList from "./ColorList";
-
 const Task = ({task,completed, remove, update}) => {
 
     const animateExit= (e)=>{
@@ -30,9 +31,15 @@ const Task = ({task,completed, remove, update}) => {
              </p>
             <p className="font-poppins font-medium break-words">{task.taskDes}</p>
             
-            <button className="bg-sky-800 shadow-md text-xs hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={completed}>{task.finished? 'Cancel' :'Completed'}</button>
-            <button className="bg-slate-600 shadow-md text-xs hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={update}>Edit</button>
-            <button className="bg-rose-500 shadow-md text-xs hover:bg-rose-600 hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={animateExit}>Remove</button>
+            <button className="bg-sky-800 shadow-md text-xs hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={completed}>
+                {task.finished? (<>
+                    <FontAwesomeIcon icon={faCheck}/> Completed
+                </>) :(<>
+                    <FontAwesomeIcon icon={faArrowLeft}/> Complete
+                </>)}
+            </button>
+            <button className="bg-slate-600 shadow-md text-xs hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={update}><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon> Edit</button>
+            <button className="bg-rose-500 shadow-md text-xs hover:bg-rose-600 hover:scale-110 active:scale-95 p-2 m-2 font-bold font-poppins rounded-sm transition-all" onClick={animateExit}><FontAwesomeIcon icon={faTrash}/> Remove</button>
         </div> 
      );
 }
