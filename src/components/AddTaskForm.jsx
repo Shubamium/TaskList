@@ -46,7 +46,10 @@ const AddTaskForm = ({submit, update, placeholderData,categoryList}) => {
             onChange={handleDesc}
             ></textarea>
 
-            <select onChange={handleCat} defaultValue={placeholderData === undefined ? "": placeholderData.category}>
+            <label htmlFor="descriptions" className="p-2 font-poppins font-bold text-indigo-900">Groups</label>
+            <select 
+            className="w-full p-2 font-poppins m-2 text-lg bg-white text-indigo-900"
+            onChange={handleCat} defaultValue={placeholderData === undefined ? "": placeholderData.category}>
                 <option value=""></option>
                 {categoryList.map((cat)=> (
                     <option value={cat.group} >{cat.group}</option>
