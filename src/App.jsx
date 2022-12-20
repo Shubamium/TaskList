@@ -81,7 +81,7 @@ function App() {
   }
   
   const showAll = ()=>{
-    setToDisplay(taskList);
+    setToDisplay('');
   }
 
   const showGroup = (groupName)=>{
