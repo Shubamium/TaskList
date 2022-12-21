@@ -6,6 +6,7 @@ import Modal from "./Modal";
 import AddGroupForm from "./AddGroupForm";
 import { useState } from "react";
 import IconList from "./IconList";
+import ColorList from "./ColorList";
 const Sidebar = ({groups, addGroup, removeGroup, showAll,showGroup}) => {
 
     let [groupAddModal,setGroupAddModal] = useState(false);
@@ -18,6 +19,7 @@ const Sidebar = ({groups, addGroup, removeGroup, showAll,showGroup}) => {
                 showGroup(group.group);
             }
         }
+        iconBgColor={group.color !== undefined ? `color-${ColorList()[group.color]} ` : undefined}
         name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={ group.icon === undefined ? faNoteSticky : IconList()[group.icon] }/>}/>
     ));
 
@@ -32,9 +34,9 @@ const Sidebar = ({groups, addGroup, removeGroup, showAll,showGroup}) => {
         <>
         <div className="panel-offset">
              <Modal isOpen={groupAddModal} onHide={()=>setGroupAddModal(false)}>
-                <AddGroupForm submit={(name,icon)=>{
+                <AddGroupForm submit={(name,icon,color)=>{
                     setGroupAddModal(false);
-                    addGroup(name,icon);
+                    addGroup(name,icon,color);
                 }}/>
              </Modal>
         </div>

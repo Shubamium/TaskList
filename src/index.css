@@ -75,7 +75,7 @@
 }
 
 .color-indigo-500{
-    @apply bg-indigo-400;
+    @apply bg-blue-600;
 }
 
 .color-violet-500{
