@@ -1,9 +1,10 @@
+import { icon } from "@fortawesome/fontawesome-svg-core";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import IconList from "./IconList";
 
 const AddGroupForm = ({submit, update}) => {
-    // if(update){
-    //     console.log(placeholderData.taskName);
-    // }
 
     let [name, setName] = useState('');
     // let [desc, setDesc] = useState(update ? placeholderData.taskDes : '');
@@ -12,6 +13,9 @@ const AddGroupForm = ({submit, update}) => {
     const handleName = (e)=>{
         setName(e.target.value);
     }
+
+    let icons = IconList();
+    let [icon, setIcon] = useState(0);
 
     // const handleDesc = (e)=>{
     //     setDesc(e.target.value);
@@ -28,23 +32,33 @@ const AddGroupForm = ({submit, update}) => {
             // let formData = new FormData(e.target);
             // let name = formData.get('taskName');
             // let description = formData.get('taskDes');
-            submit(name);
+            submit(name,icon);
         }}>
-            <h2 className="font-poppins text-3xl font-bold text-blue-900 ">Add Group</h2>
+            <h2 className="font-poppins text-3xl font-bold text-blue-900">Add Group</h2>
             <label htmlFor="name" className="p-2 font-poppins font-bold text-indigo-900">Name</label>
             <input type="text" id="name" name="taskName" className="p-2 m-2 w-full" required
             placeholder="Group name . . ."
             value={name}  
             onChange={handleName}
-
             />
 
-            {/* <select selected={cat} onChange={handleCat}>
-                <option value="" selected></option>
-                {categoryList.map((cat)=> (
-                    <option value={cat}>{cat}</option>
-                ))}
-            </select> */}
+            <label  className="p-2 font-poppins font-bold text-indigo-900">Icons</label>
+            <div className="flex justify-around gap-1 p-2">
+              {
+                icons.map((iconInList,index)=>{
+                    return(
+                        <div 
+                        onClick={()=>{
+                            setIcon(index);
+                        }}
+                        key={index} className={`text-blue-900 w-9 h-9 cursor-pointer bg-slate-300 border-2 hover:scale-105 active:scale-95 hover hover-selected border-white ${icon === index && 'color-selected'}`}>
+                            <FontAwesomeIcon icon={iconInList} className="w-full h-full scale-90"/>
+                        </div>
+                    )
+                })
+              }
+            </div>
+        
             <button type="submit" className="block mx-auto bg-sky-900 font-poppins rounded-sm font-bold p-2 m-4 shadow-md relative text-sky-300 hover:scale-105 active:scale-95">Add Group</button>
         </form>
      );

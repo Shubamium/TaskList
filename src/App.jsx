@@ -26,12 +26,12 @@ function App() {
   ]);
 
 
-  const addGroup = (name)=>{
+  const addGroup = (name,iconID)=>{
       setGroups((prev)=>{
           let newGroup = [...prev];
           let newId = prev.map((group) => group.id)
           newId = Math.max(...newId) + 1;
-          newGroup.push({id:newId,group:name});
+          newGroup.push({id:newId,group:name,icon:iconID});
           
           localStorage.setItem('groupList', JSON.stringify(newGroup));
           return newGroup;
