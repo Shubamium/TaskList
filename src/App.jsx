@@ -18,12 +18,15 @@ function App() {
   ];
 
    // This state ideally should be lifted up
-   let [groups, setGroups] = useState([
-    {id:0,group:'Chores'},
-    {id:1,group:'Life'},
-    {id:2,group:'Thoughts'},
-    {id:3,group:'Quotes'}
-  ]);
+   let [groups, setGroups] = useState(
+  //   [
+  //   {id:0,group:'Chores',color:2},
+  //   {id:1,group:'Life',color:4},
+  //   {id:2,group:'Thoughts',color:6},
+  //   {id:3,group:'Quotes',color:1}
+  // ]p
+  []
+  );
 
 
   const addGroup = (name,iconID,bgColor)=>{
@@ -31,7 +34,7 @@ function App() {
           let newGroup = [...prev];
           let newId = prev.map((group) => group.id)
           newId = Math.max(...newId) + 1;
-          newGroup.push({id:newId,group:name,icon:iconID,color:bgColor});
+          newGroup.push({id:newId,group: name,icon:iconID,color:bgColor});
           
           localStorage.setItem('groupList', JSON.stringify(newGroup));
           return newGroup;
@@ -57,7 +60,7 @@ function App() {
           localStorage.setItem('groupList',JSON.stringify(groups));
           res = groups;
         }
-      
+        console.log(res);
       setGroups(res);
     }
 
@@ -88,7 +91,7 @@ function App() {
   const removeGroupFromTask = (groupName)=>{
     setTaskList((tl)=>{
       let updated = [...tl];
-      // console.log(taskList,groupName);
+
       updated = updated.map((task)=>{
           let taskNew = {...task};
           if(task.category === groupName){
@@ -96,7 +99,6 @@ function App() {
           }
           return taskNew;
       });
-    //  console.log(updated);
 
       return updated;
     });
@@ -117,10 +119,21 @@ function App() {
     return toDisplay === '' ? taskList : filterTask();
   };
 
+  const changeOrderGroup =(prev,current)=>{
+    console.log(prev,current);
+    setGroups((group)=>{
+      let updated = [...group];
+      let moved = updated.splice(prev,1);
+      updated.splice(current,0,...moved);
+      localStorage.setItem('groupList', JSON.stringify(updated));
+
+      return updated;
+    });
+  }
   return(
     <div className="app">
       <Sidebar groups={groups}  addGroup={addGroup} removeGroup={removeGroup}
-      displayGroup="a" showAll={showAll} showGroup={showGroup}
+      displayGroup="a" showAll={showAll} showGroup={showGroup} changeOrder={changeOrderGroup}
       />
       <TaskDisplayer toDisplay={getFilteredTask} headerText={()=>{
         return toDisplay === '' ? 'Task List' : toDisplay;

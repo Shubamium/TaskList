@@ -4,26 +4,32 @@ import SidebarButton from "./SidebarButton";
 import Modal from "./Modal";
 
 import AddGroupForm from "./AddGroupForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IconList from "./IconList";
 import ColorList from "./ColorList";
-const Sidebar = ({groups, addGroup, removeGroup, showAll,showGroup}) => {
+
+// import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
+
+const Sidebar = ({groups, addGroup, removeGroup, showAll,showGroup,changeOrder}) => {
 
     let [groupAddModal,setGroupAddModal] = useState(false);
     let [editMode,setEditMode] = useState(false);
 
-    let showGroupButtons = groups.map((group)=>(
-        <SidebarButton 
-        click={
-            ()=>{
-                showGroup(group.group);
-            }
-        }
-        iconBgColor={group.color !== undefined ? `color-${ColorList()[group.color]} ` : undefined}
-        name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={ group.icon === undefined ? faNoteSticky : IconList()[group.icon] }/>}/>
-    ));
-
-    let editGroupButtons = groups.map((group)=>(
+    // let [toShow, setToShow] = useState();
+   
+    let toShow =  groups.map((group)=>(
+                        <SidebarButton 
+                        click={
+                            ()=>{
+                                showGroup(group.group);
+                            }
+                        }
+                        iconBgColor={group.color !== undefined ? `color-${ColorList()[group.color]} ` : undefined}
+                        name={group.group} key={group.id} renderIcon={()=><FontAwesomeIcon icon={ group.icon === undefined ? faNoteSticky : IconList()[group.icon] }/>}/>
+                    ))
+                    ;
+ 
+    const editGroupButtons = groups.map((group)=>(
         <SidebarButton 
         click={()=>{
             removeGroup(group.id);
@@ -52,7 +58,10 @@ const Sidebar = ({groups, addGroup, removeGroup, showAll,showGroup}) => {
                <SidebarButton name="All Tasks" iconBgColor="bg-rose-800" renderIcon={()=><FontAwesomeIcon icon={faList}/>} click={()=>showAll()}/>
                <SidebarButton name="Add Group" iconBgColor="bg-indigo-600" renderIcon={()=><FontAwesomeIcon icon={faPlus}/>} click={()=>setGroupAddModal(true)}/>
                <SidebarButton name={editMode ? "Cancel" : "Edit Group"} iconBgColor="bg-indigo-600" renderIcon={()=><FontAwesomeIcon icon={editMode ? faCancel : faEdit }/>} click={()=>setEditMode((prev)=> !prev)}/>
-               {editMode ? editGroupButtons : showGroupButtons}
+               {editMode ? editGroupButtons : toShow}
+       
+        
+               
             </div>
 
         </div>
